@@ -377,9 +377,8 @@ Old version:
         function g(uint[] arr, bytes8 x, OtherContract otherContract) public {
             otherContract.transfer(1 ether);
 
-            // 由于uint32（4个字节）小于byte8（8个字节），
-            // x的前4个字节将被丢失。
-            // 这可能会导致意想不到的行为，因为bytesX是向右填充的。
+            // 由于uint32（4个字节）小于byte8（8个字节）， x的前4个字节将被丢失。
+            // 这样可能会出错，因为bytesX是向右填充的。
             uint32 y = uint32(x);
             myNumber += y + msg.value;
         }
@@ -435,18 +434,18 @@ Old version:
         using AddressMakePayable for address;
         // 必须指定'arr'的数据位置
         function g(uint[] memory /* arr */, bytes8 x, OtherContract otherContract, address unknownContract) public payable {
-            // 没有提供'otherContract.transfer'。
             // 由于'OtherContract'的代码是已知的，并且具有回退功能，
+            // 没有提供'otherContract.transfer'。
             // address(otherContract)具有'address payable'类型。
             address(otherContract).transfer(1 ether);
 
+            // 因为'address(unknownContract)'不是'address payable'类型。
             // 没有提供'unknownContract.transfer'。
             // 没有提供'address(unknownContract).transfer'
-            // 因为'address(unknownContract)'不是'address payable'类型。
-            // 如果该函数需要一个您想发送资金的'address'类型，
-            // 您可以通过'uint160'将其转换为'address payable'类型。
+            // 如果该函数想发送资金的'address'类型，
+            // 可以通过'uint160'将其转换为'address payable'类型。
             // 注意：不建议这样做，应尽可能使用明确的'address payable'类型。
-            // 为了提高明确性，我们建议使用一个库来进行转换（在这个例子中的合同后面提供）。
+            // 为了提高明确性，建议使用一个库来进行转换（在这个例子中的合同后面提供）。
             address payable addr = unknownContract.makePayable();
             require(addr.send(1 ether));
 
@@ -461,7 +460,7 @@ Old version:
         }
     }
 
-    // 我们可以定义一个库，将 ``address`` 类型明确转换为 ``address payable`` 类型，作为一种变通方法。
+    // 作为变通方法，可以定义一个库，将 ``address`` 类型转换为 ``address payable`` 类型
     library AddressMakePayable {
         function makePayable(address x) internal pure returns (address payable) {
             return address(uint160(x));
