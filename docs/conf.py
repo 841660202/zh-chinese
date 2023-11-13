@@ -16,7 +16,8 @@
 import sys
 import os
 import re
-
+from docutils import nodes
+from docutils.parsers.rst import roles
 from pygments_lexer_solidity import SolidityLexer, YulLexer
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -298,3 +299,14 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+def color_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+    return [nodes.inline(rawtext, text, classes=[role])], []
+
+roles.register_local_role('red', color_role)
+roles.register_local_role('green', color_role)
+roles.register_local_role('blue', color_role)
+roles.register_local_role('bg-line', color_role)
+roles.register_local_role('bg-cyan', color_role)
+roles.register_local_role('bg-violet', color_role)
+roles.register_local_role('bg-orange', color_role)

@@ -1,75 +1,112 @@
 pre {
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
 }
 
 .wy-table-responsive table td,
 .wy-table-responsive table th {
-    white-space: normal;
+  white-space: normal;
 }
 
 .rst-content table.docutils td {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 /* links */
 .rst-content a:not(:visited) {
-    color: #002fa7;
+  color: #002fa7;
 }
 
 .rst-content .highlighted {
-    background: #eac545;
+  background: #eac545;
 }
 
 /* code block highlights */
 .rst-content pre {
-    background: #fafafa;
+  background: #fafafa;
 }
 
 .wy-side-nav-search > a img.logo {
-    width: 100px;
-    padding: 0;
+  width: 100px;
+  padding: 0;
 }
 
 .wy-side-nav-search > a {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* project version (displayed under project logo) */
 .wy-side-nav-search > div.version {
-    color: #272525;
+  color: #272525;
 }
 
 /* menu section headers */
 .wy-menu p.caption {
-    color: #65afff;
+  color: #65afff;
 }
 
 /* Link to Remix IDE shown next to code snippets */
 .rst-content p.remix-link-container {
-    display: block;
-    text-align: right;
-    margin: 0;
-    line-height: 1em;
+  display: block;
+  text-align: right;
+  margin: 0;
+  line-height: 1em;
 }
 
 .rst-content .remix-link-container a.remix-link {
-    display: inline-block;
-    font-size: 0.7em;
-    padding: 0.1em 0.4em;
-    background: #e1e4e5;
-    color: #707070;
+  display: inline-block;
+  font-size: 0.7em;
+  padding: 0.1em 0.4em;
+  background: #e1e4e5;
+  color: #707070;
 }
 
 .rst-content .remix-link-container a.remix-link:hover {
-    background: #c8cbcc;
+  background: #c8cbcc;
 }
 
 .rst-content div.highlight-solidity,
 .rst-content div.highlight-yul {
-    margin-top: 0;
+  margin-top: 0;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+.blue {
+  color: blue;
+}
+.green {
+  color: green;
+}
+
+.bg-cyan {
+  color: #fff;
+  background-color: rgb(17, 171, 171);
+  /* border-radius: 6px; */
+  padding: 2px 6px;
+}
+.bg-orange {
+  color: #fff;
+  background-color: orangered;
+  /* border-radius: 6px; */
+  padding: 2px 6px;
+}
+.bg-violet {
+  color: #fff;
+  background-color: #636cff;
+  /* border-radius: 6px; */
+  padding: 2px 6px;
+}
+.bg-line {
+  background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
 }

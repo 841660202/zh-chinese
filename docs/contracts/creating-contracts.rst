@@ -8,16 +8,19 @@
 
 集成开发环境，如 `Remix <https://remix.ethereum.org/>`_，使用UI元素使创建过程无缝化。
 
-在以太坊上以编程方式创建合约的一种方法是通过JavaScript API `web3.js <https://github.com/web3/web3.js>`_。
+:bg-violet:`在以太坊上以编程方式创建合约的一种方法是通过JavaScript`
+
+API `web3.js <https://github.com/web3/web3.js>`_。
 它有一个名为 `web3.eth.Contract <https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#new-contract>`_ 的函数，
-以方便创建合约。
+以方便创建合约。`
 
 当一个合约被创建时，它的 :ref:`构造函数（constructor） <constructor>`
 （一个用 ``constructor`` 关键字声明的函数）被执行一次。
 
-构造函数是可选的。但是只允许有一个构造函数，这意味着不支持重载。
+:bg-violet:`构造函数是可选的。但是只允许有一个构造函数，这意味着不支持重载` 。
 
-构造函数执行完毕后，合约的最终代码被存储在区块链上。
+:bg-violet:`构造函数执行完毕后，合约的最终代码被存储在区块链上`。
+
 这段代码包括所有公开和外部函数，以及所有通过函数调用可从那里到达的函数。
 部署的代码不包括构造函数代码或只从构造函数调用的内部函数。
 

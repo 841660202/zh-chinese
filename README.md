@@ -26,6 +26,10 @@ Solidity 是一种静态类型的，面向合约的高级语言，用于在 Ethe
   - [许可](#许可)
   - [安全](#安全)
   - [run](#run)
+  - [](#)
+  - [sphinx-autobuild -h](#sphinx-autobuild--h)
+  - [rst 语法](#rst-语法)
+  - [扩展 rst 语法](#扩展-rst-语法)
 
 ## 背景介绍
 
@@ -100,3 +104,96 @@ cd docs && ./docs.sh
 ```
 
 https://www.sphinx-doc.org/en/master/man/sphinx-build.html
+
+##
+
+如果你希望 Sphinx 在源文件发生变化时自动重新生成 HTML 文档，你可以使用 sphinx-autobuild 工具。这是一个独立的工具，它会监听你的源文件的变化，并在文件发生变化时自动运行 sphinx-build。
+
+首先，你需要安装 sphinx-autobuild。你可以使用 pip 来安装：
+
+`pip install sphinx-autobuild`
+
+然后，你可以运行 sphinx-autobuild，并指定你的源文件目录和输出目录：
+
+`sphinx-autobuild sourcedir builddir`
+
+这个命令将启动一个 web 服务器，并在源文件发生变化时自动重新生成 HTML 文档。你可以在你的 web 浏览器中访问 http://localhost:8000 来查看你的文档。
+
+注意：sphinx-autobuild 默认监听 8000 端口，如果这个端口已经被其他服务使用，你可以使用-p 选项来指定一个不同的端口，例如：`sphinx-autobuild -p 8080 sourcedir builddir`。
+
+## sphinx-autobuild -h
+
+```
+➜  ~/Desktop/docs/zh-chinese sphinx-autobuild -h
+usage: sphinx-autobuild [-h] [--port PORT] [--host HOST] [--re-ignore RE_IGNORE] [--ignore IGNORE] [--no-initial] [--open-browser] [--delay DELAY]
+                        [--watch DIR] [--pre-build COMMAND] [--version]
+                        sourcedir outdir [filenames ...]
+
+positional arguments:
+  sourcedir             source directory
+  outdir                output directory for built documentation
+  filenames             specific files to rebuild on each run (default: None)
+
+options:
+  -h, --help            show this help message and exit
+  --port PORT           port to serve documentation on. 0 means find and use a free port (default: 8000)
+  --host HOST           hostname to serve documentation on (default: 127.0.0.1)
+  --re-ignore RE_IGNORE
+                        regular expression for files to ignore, when watching for changes (default: [])
+  --ignore IGNORE       glob expression for files to ignore, when watching for changes (default: [])
+  --no-initial          skip the initial build (default: False)
+  --open-browser        open the browser after building documentation (default: False)
+  --delay DELAY         how long to wait before opening the browser (default: 5)
+  --watch DIR           additional directories to watch (default: [])
+  --pre-build COMMAND   additional command(s) to run prior to building the documentation (default: [])
+  --version             show program's version number and exit
+
+sphinx's arguments:
+  The following arguments are forwarded as-is to Sphinx. Please look at `sphinx --help` for more information.
+    -b=builder, -a, -E, -d=path, -j=N, -c=path, -C, -D=setting=value, -t=tag, -A=name=value, -n, -v, -q, -Q, -w=file, -W, -T, -N, -P
+
+```
+
+## rst 语法
+
+https://sublime-and-sphinx-guide.readthedocs.io/en/latest/lists.html
+
+## 扩展 rst 语法
+
+在 RestructuredText (reST) 中，没有直接的方式来为文本添加颜色。reST 语法主要关注内容和结构，而不是样式。样式通常在生成文档的过程中由 CSS 或其他样式语言处理。
+
+然而，你可以通过定义自定义的角色或指令来实现这个功能。例如，你可以在 Sphinx 的 `conf.py` 文件中定义一个新的角色：
+
+```py
+from docutils import nodes
+from docutils.parsers.rst import roles
+
+# 上述两个插件写入到文件中后，需要执行 /zh-chinese/docs 文件夹下的 ./docs.sh, 来安装依赖
+
+
+def color_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
+  return [nodes.inline(rawtext, text, classes=[role])], []
+
+roles.register_local_role('red', color_role)
+roles.register_local_role('green', color_role)
+# 这里写完了需要重新执行 ./dev.sh
+```
+
+然后在 CSS 文件中定义这些角色的样式：
+
+```css
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+```
+
+最后，在 reST 文档中使用这些角色：
+
+```rst
+This is :red:`red` and this is :green:`green`.
+```
+
+请注意，这种方法需要你有一些 Python 和 CSS 的知识，并且可能不适用于所有的 reST 渲染器。

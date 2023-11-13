@@ -183,6 +183,12 @@ Solidity 是静态类型语言，支持继承，库和复杂的用户自定义�
 
 .. toctree::
    :maxdepth: 2
+   :caption: 自定义
+
+   docs-style.rst
+
+.. toctree::
+   :maxdepth: 2
    :caption: 资源
 
    style-guide.rst
@@ -191,3 +197,5 @@ Solidity 是静态类型语言，支持继承，库和复杂的用户自定义�
    contributing.rst
    language-influences.rst
    brand-guide.rst
+
+
